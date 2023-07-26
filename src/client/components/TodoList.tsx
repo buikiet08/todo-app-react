@@ -84,12 +84,11 @@ export const TodoList = () => {
                     checked={todo.status === 'completed' ? true : false}
                     onChange={async () => {
                       setIdItem(todo.id)
-                      updateTodo.mutate({
+                      await updateTodo.mutate({
                         todoId: todo.id,
                         status:
                           todo.status === 'completed' ? 'pending' : 'completed',
                       })
-                      todoRefetch()
                     }}
                     className="h-6 w-6 rounded-6 border border-gray-300 focus:border-gray-700 focus:outline-none data-[state=checked]:border-gray-700 data-[state=checked]:bg-gray-700"
                   />
@@ -106,7 +105,6 @@ export const TodoList = () => {
                     type="button"
                     onClick={async () => {
                       await deleteTodo.mutate({ id: todo.id })
-                      todoRefetch()
                     }}
                     className="bg-red-500 rounded-md ml-auto p-2 text-gray-900 hover:text-[#FF0000]"
                   >
